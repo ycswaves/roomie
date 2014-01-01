@@ -1,0 +1,159 @@
+<template name="billPage">
+	<div class="container">
+    <div class="row">
+      <div class="col-md-3">
+      {{> leftSidebar}}
+	  	</div><!-- /span-3 -->
+      <div class="col-md-9" style="border-left: 2px #F0F0F0 solid;">
+      	<a href="#">
+      		<strong>
+      			<span class="glyphicon glyphicon-dashboard"></span> My Dashboard
+      		</strong>
+      	</a>  
+        <button id="addBillBtn" class="btn btn-primary pull-right"><span class="glyphicon glyphicon-plus-sign"></span> New bill</button>
+      	<hr>
+      	<div style="padding: 0 10px">
+          {{> billsList}}
+        </div>
+      </div>
+    </div>
+</div>
+	
+</template>
+
+<template name="billsList">
+	<div id="billContainer" >
+		<div id="billToggle" style="display:none" class="alert alert-danger col-md-10">
+			{{> newBill}}
+		</div>
+
+		{{#each bills}}
+			{{> billItem}}
+		{{/each}}
+	</div>	
+</template>
+
+<template name="billItem">
+	<div class="row">
+		<div class="col-md-6">
+			<div class="panel panel-danger" data="{{_id}}">
+				<div class="panel-heading">
+					<a id="titleEdit" class="editable" data-type="text">{{title}}</a>	
+					&nbsp( {{formatDate addedAt}} )
+					{{#if isOwner _id}}
+				  <button id="table-edit" class="btn btn-default btn-xs pull-right">edit</button>
+				  {{/if}}
+				</div>
+				<table class="table table-hover">
+			    <thead>
+			      <tr>
+			        <th>Items</th>
+			        <th class="text-center">Amount</th>
+			      </tr>
+			    </thead>
+			    <tbody>
+			    	{{#each details}}
+			      <tr>
+		          <td class="col-md-6">
+		          	<em>
+		          		<a class="editable itemNameEdit expandWidth" 
+		          		data-oldvalue="{{itemName}}" data-type="text">{{itemName}}</a>
+		          	</em>
+		          </td>
+		          <td class="col-md-6 text-center">
+		          	$ <a class="editable itemPriceEdit expandWidth" 
+		          		data-oldvalue="{{itemPrice}}" data-type="text">{{itemPrice}}</a>
+		          </td>
+			      </tr>
+			      {{/each}}
+
+			      <tr>
+	            <td class="text-right"><h4><strong>Total: </strong></h4></td>
+	            <td class="text-center text-danger"><h4><strong>${{totalAmount details}}</strong></h4></td>
+			      </tr>
+			    </tbody>
+				</table>
+				<!-- <div class="panel-footer">
+					Payers: {{showPayers notify}}
+			  </div> -->
+			</div>
+		</div>
+		<div class="col-md-4">
+			{{#each notify}}
+		   <P>
+		   	  <i class="fa fa-user"></i> {{getUsernameById payerId}}
+		   	  {{#if hasPaid}}
+		   	  <span class="label pull-right">
+		   	  	<a class="editable payStatusEdit" data-type="select" data-source="[{value:'true', text: 'Not Paid'}, {value:'true', text: 'Paid'}]" data-payerid="{{payerId}}">Paid</a>
+		   	  </span>
+		   	  {{else}}
+		   	  <span class="label pull-right">
+		   	  	<a class="editable payStatusEdit" data-type="select" data-source="[{value:'false', text: 'Not Paid'}, {value:'true', text: 'Paid'}]" data-payerid="{{payerId}}">Not Paid</a>
+		   	  </span>
+		   	  {{/if}}
+		   </p>
+		  {{/each}}
+		  <p>Total / {{notify.length}} = {{totalAmount details notify.length}}</p>
+		  <!-- <div class="progress progress-striped active">
+			  <div class="progress-bar" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 100%">
+			    <span class="sr-only">60% Complete (warning)</span>
+			  </div>
+			</div> -->
+		</div>
+	</div>
+	<hr>
+</template>
+
+<template name="newBill">
+	<form class="form-horizontal" id="newBillForm" role="form">
+	  <div id="inputOnlyDiv">
+		  <div class="form-group">
+		    <label class="col-sm-2 control-label">Bill Title</label>
+		    <div class="col-sm-6">
+		      <input type="text" class="form-control" name="title" placeholder="Bill title">
+		    </div>
+		  </div>
+
+		  <!-- <div class="form-group">
+		    <label class="col-sm-2 control-label">Due Date</label>
+		    <div class="col-sm-6">
+		      <input type="text" class="form-control" name="dueDate" placeholder="optional">
+		    </div>
+		  </div> -->
+
+		  <div class="form-group">
+		  	<label class="col-sm-2 control-label">Payers</label>
+		  	<div class="col-sm-6">
+		  		{{#each groupInfo.members}}
+				  <label class="checkbox-inline">
+					  <input type="checkbox" name="members" value="{{this}}" checked> {{getUsernameById this}}
+					</label>
+					{{/each}}
+				</div>
+			</div>
+
+		  <div class="form-group">
+		    <label class="col-sm-2 control-label">Item</label>
+		    <div class="col-sm-5">
+		      <input type="text" class="form-control" name="itemName" placeholder="Item name">
+		    </div>
+
+		    <div class="input-group col-md-2" style="max-width:120px; margin-left:15px">
+				  <span class="input-group-addon">$</span>
+				  <input type="text" name="itemPrice" class="form-control">
+				</div>
+		  </div>
+		</div>  
+		<input type="hidden" name="itemCount" value="1">
+	  <div class="form-group">
+	    <div class="col-sm-offset-2 col-sm-10">
+	    	<div class="btn-group col-sm-5">
+				  <button id="addItemBtn" type="button" class="btn btn-default"><i class="fa fa-plus"></i> item</button>
+				  <button id="removeItemBtn" type="button" class="btn btn-default"><i class="fa fa-minus"></i> item</button>
+				</div>
+	      <button type="submit" class="btn btn-primary">Submit</button>
+	    </div>
+	  </div>
+	</form>
+</template>
+

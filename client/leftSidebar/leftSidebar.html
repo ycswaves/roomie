@@ -1,0 +1,40 @@
+<template name="leftSidebar">
+  <div class="well well-sm">
+    <i class="fa fa-group"></i>&nbsp
+    {{groupInfo.groupName}}
+    <ul>
+      {{#each groupInfo.members}}  
+      <li>{{getUsernameById this}}</li>
+      {{/each}}
+    </ul>
+  </div>
+  <hr>
+  <ul class="nav nav-pills nav-stacked">
+    <li class="nav-header"></li>
+    <li class="active">
+    	<a href="http://bootply.com" title="The Bootstrap Playground" target="ext">
+    		<i class="fa fa-dollar"></i>&nbsp
+    		Bills
+    	</a>
+    </li>
+    <li>
+    	<a href="/tagged/bootstrap-3">
+    		<i class="fa fa-bullhorn"></i>&nbsp
+    		Announcement
+    	</a>
+    </li>
+    <!-- <li>
+    	<a href="/tagged/bootstrap-3">
+    		<i class="fa fa-star-half-o"></i>&nbsp
+    		Leaderboard
+    	</a>
+    </li>
+    <li>
+    	<a href="/tagged/bootstrap-3">
+    		<i class="fa fa-hand-o-up"></i>&nbsp
+    		Vote
+    	</a>
+    </li> -->
+    
+  </ul>
+</template>
