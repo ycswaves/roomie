@@ -4,9 +4,9 @@
 
 <body>
 	<div class="container">
-	<!-- Navbar -->
+	{{#if currentUser}}
 	  {{> topNav}}
-	<!--  /nav bar -->
+	{{/if}}
 	  {{yield}}
 	</div><!-- /container -->
 </body>

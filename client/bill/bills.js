@@ -137,11 +137,11 @@ Template.newBill.events({
 		 '<div class="form-group">'
 		  +'<label class="col-sm-2 control-label">Item</label>'
 		  +'<div class="col-sm-5">'
-		    +'<input type="text" class="form-control" name="itemName" placeholder="Item name">'
+		    +'<input type="text" class="form-control input-sm" name="itemName" placeholder="Item name">'
 		  +'</div>'
 		  +'<div class="input-group col-md-2" style="max-width:120px; margin-left:15px">'
 				+'<span class="input-group-addon">$</span>'
-				+'<input type="text" name="itemPrice" class="form-control">'
+				+'<input type="text" name="itemPrice" class="form-control input-sm">'
 			+'</div>'
 		+'</div>';
 		$('#inputOnlyDiv').append(newItemInput);

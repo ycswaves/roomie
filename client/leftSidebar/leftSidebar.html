@@ -1,18 +1,8 @@
 <template name="leftSidebar">
-  <div class="well well-sm">
-    <i class="fa fa-group"></i>&nbsp
-    {{groupInfo.groupName}}
-    <ul>
-      {{#each groupInfo.members}}  
-      <li>{{getUsernameById this}}</li>
-      {{/each}}
-    </ul>
-  </div>
-  <hr>
   <ul class="nav nav-pills nav-stacked">
     <li class="nav-header"></li>
     <li class="active">
-    	<a href="http://bootply.com" title="The Bootstrap Playground" target="ext">
+    	<a href="#">
     		<i class="fa fa-dollar"></i>&nbsp
     		Bills
     	</a>
@@ -35,6 +25,15 @@
     		Vote
     	</a>
     </li> -->
-    
   </ul>
+  <hr>
+  <div class="">
+    <i class="fa fa-group"></i>&nbsp
+    {{groupInfo.groupName}}
+    <ul>
+      {{#each groupInfo.members}}  
+      <li>{{getUsernameById this}}</li>
+      {{/each}}
+    </ul>
+  </div>
 </template>
