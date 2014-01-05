@@ -1,5 +1,6 @@
 <head> 
   <title>Roomie</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 </head> 
 
 <body>
@@ -7,6 +8,12 @@
 	{{#if currentUser}}
 	  {{> topNav}}
 	{{/if}}
-	  {{yield}}
 	</div><!-- /container -->
+	<div>{{yield}}</div>
 </body>
+
+<template name="footer">
+	<div class="" id="footer">
+    <p class="text-muted pull-right"> A YCS production</p>
+	</div>
+</template>

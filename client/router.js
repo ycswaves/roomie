@@ -36,6 +36,10 @@ Router.map(function () {
   	template: 'billPage',
     waitOn: function () {
       return Meteor.subscribe('bills');
+    },
+    data: function () {
+      templateData = { bills: Bills.find({},{sort: {addedAt: -1}}) };
+      return templateData;
     }
   });
   // matches all urls but doesn't get called until all previous routes have been tested

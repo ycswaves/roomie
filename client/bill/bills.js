@@ -1,8 +1,8 @@
-Template.billsList.helpers({
-	bills: function(){
-		return Bills.find({});
-	}
-});
+// Template.billsList.helpers({
+// 	bills: function(){
+// 		return Bills.find({},{sort: {addedAt: -1}});
+// 	}
+// });
 
 Template.billItem.helpers({
 	totalAmount: function(itemArr, divideBy){
@@ -140,7 +140,7 @@ Template.newBill.events({
 		    +'<input type="text" class="form-control input-sm" name="itemName" placeholder="Item name">'
 		  +'</div>'
 		  +'<div class="input-group col-md-2" style="max-width:120px; margin-left:15px">'
-				+'<span class="input-group-addon">$</span>'
+				+'<span class="input-group-addon input-sm">$</span>'
 				+'<input type="text" name="itemPrice" class="form-control input-sm">'
 			+'</div>'
 		+'</div>';
@@ -200,10 +200,15 @@ Template.newBill.events({
 				//todo: handle err
 			}
 			else{
-				//t.findAll('input:not([type=hidden])').val('');
-				console.log('bill insert success');
+				//console.log('bill insert success');
 				$('#newBillForm')[0].reset();
 				$('#billToggle').hide();
+				Meteor.call('sendEmail',
+										 mailList, //to
+										'noreply@roomie.meteor.com',//from
+										'You have a new bill',//subject
+										 content //content'
+										);
 			}
 		});
 	}

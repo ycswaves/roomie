@@ -1,10 +1,10 @@
 <template name="billPage">
 	<div class="container">
     <div class="row">
-      <div class="col-md-3">
+      <div class="col-sm-12 col-md-3">
       {{> leftSidebar}}
 	  	</div><!-- /span-3 -->
-      <div class="col-md-9 well well-sm" style="background: rgba(0, 255, 255, .25);">
+      <div class="col-sm-12 col-md-9 div-dashboard">
       	<a href="#">
       		<strong>
       			<span class="glyphicon glyphicon-dashboard"></span> My Dashboard
@@ -17,8 +17,48 @@
         </div>
       </div>
     </div>
-</div>
-	
+	</div>
+	{{> footer}}
+</template>
+
+<template name="leftSidebar">
+  <ul class="nav nav-pills nav-stacked">
+    <li class="nav-header"></li>
+    <li class="active">
+    	<a href="#">
+    		<i class="fa fa-dollar"></i>&nbsp
+    		Bills
+    	</a>
+    </li>
+    <li>
+    	<a href="/tagged/bootstrap-3">
+    		<i class="fa fa-bullhorn"></i>&nbsp
+    		Announcement
+    	</a>
+    </li>
+    <!-- <li>
+    	<a href="/tagged/bootstrap-3">
+    		<i class="fa fa-star-half-o"></i>&nbsp
+    		Leaderboard
+    	</a>
+    </li>
+    <li>
+    	<a href="/tagged/bootstrap-3">
+    		<i class="fa fa-hand-o-up"></i>&nbsp
+    		Vote
+    	</a>
+    </li> -->
+  </ul>
+  <hr class="style-dash">
+  <div class="">
+    <i class="fa fa-group"></i>&nbsp
+    {{groupInfo.groupName}}
+    <ul>
+      {{#each groupInfo.members}}  
+      <li>{{getUsernameById this}}</li>
+      {{/each}}
+    </ul>
+  </div>
 </template>
 
 <template name="billsList">
@@ -102,7 +142,7 @@
 			</div> -->
 		</div>
 	</div>
-	<hr>
+	<hr class="style-gradient">
 </template>
 
 <template name="newBill">
@@ -140,7 +180,7 @@
 		    </div>
 
 		    <div class="input-group col-md-2" style="max-width:120px; margin-left:15px">
-				  <span class="input-group-addon">$</span>
+				  <span class="input-group-addon input-sm">$</span>
 				  <input type="text" name="itemPrice" class="form-control input-sm">
 				</div>
 		  </div>
