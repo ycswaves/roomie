@@ -6,14 +6,14 @@ Handlebars.registerHelper('getUsernameById', function(uid) {
 	return user.username;
 });
 
-Handlebars.registerHelper('groupInfo', function() {
-	var uid = Meteor.userId();
-	var groupInfo = BelongGroups.findOne(
-										{userId: uid}, 
-										{userId: 0} //not select userID
-									);
-	return Groups.findOne({_id: groupInfo.groupId});
-});
+// Handlebars.registerHelper('groupInfo', function() {
+// 	var uid = Meteor.userId();
+// 	var groupInfo = BelongGroups.findOne(
+// 										{userId: uid}, 
+// 										{userId: 0} //not select userID
+// 									);
+// 	return Groups.findOne({_id: groupInfo.groupId});
+// });
 
 Handlebars.registerHelper('formatDate', function(date) {
 	var formattedDate = date.getFullYear()+"-"

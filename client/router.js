@@ -38,7 +38,12 @@ Router.map(function () {
       return Meteor.subscribe('bills');
     },
     data: function () {
-      templateData = { bills: Bills.find({},{sort: {addedAt: -1}}) };
+      var groupId = BelongGroups.findOne({userId: Meteor.userId()},{groupId:1}).groupId;
+      Session.set('currentGroup', groupId);
+      templateData = { 
+        bills: Bills.find({groupId: groupId},{sort: {addedAt: -1}}),
+        groupInfo: Groups.findOne({_id:groupId}) 
+      };
       return templateData;
     }
   });

@@ -183,6 +183,7 @@ Template.newBill.events({
     }
 
     bill = {
+    	groupId: Session.get('currentGroup'),
     	author: uid,
     	title: billTitle,
     	details: billDetails,

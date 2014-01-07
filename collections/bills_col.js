@@ -19,6 +19,10 @@ BillNotifySchema = new SimpleSchema({
 
 Bills = new Meteor.Collection2("bills", {
     schema: {
+        groupId: {
+            type: String,
+            label: "id of the group that this bill goes to"
+        },
         author: {
             type: String,
             label: "name of the author"
