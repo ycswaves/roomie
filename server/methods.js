@@ -12,5 +12,9 @@ Meteor.methods({
       subject: subject,
       html: html
     });
+  },
+
+  updateDefaultGroup: function (uid) {
+    Meteor.users.update({_id:uid},{$set:{defaultGroup:''}});
   }
 });

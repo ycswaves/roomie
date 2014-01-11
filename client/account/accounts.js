@@ -53,10 +53,28 @@ function isValidName(val){
 }
 
 function hasGroup(uid){
-  if (BelongGroups.find({userId: uid}).count() > 0) {
-    return true;
-  };
-  return false;
+  if (Meteor.user().defaultGroup == undefined) {
+    Meteor.call('updateDefaultGroup', uid, 
+                  function (err, msg){
+                    if(err){
+                      //handle error
+                      console.log(err);
+                    }
+                  });     
+    return false;
+  } else if (Meteor.user().defaultGroup == ''){
+    return false;
+  } else {
+    return true; // could return default group id
+  }
+}
+
+function loginSuccess(){
+  if (hasGroup(Meteor.userId())){
+    Router.go('/dashboard');
+  } else {
+    Router.go('/creategroup');
+  }
 }
 
 // Login Form Helpers
@@ -82,11 +100,7 @@ Template.loginForm.events({
         if (err && err.error === 403) {
           Session.set('displayMessage', 'Login Error: username or password is not correct.');
         } else {
-          if (hasGroup(Meteor.userId())){
-            Router.go('/dashboard');
-          } else {
-            Router.go('/creategroup');
-          }
+          loginSuccess();
         }
       });
     }
@@ -107,11 +121,7 @@ Template.loginForm.events({
       if (err && err.error === 403) {
           Session.set('displayMessage', 'Login Error: username or password is not correct.');
       } else {
-          if (hasGroup(Meteor.userId())){
-            Router.go('/dashboard');
-          } else {
-            Router.go('/creategroup');
-          }
+          loginSuccess();
       }
     });
   },
@@ -122,12 +132,7 @@ Template.loginForm.events({
       if (err && err.error === 403) {
           Session.set('displayMessage', 'Login Error: username or password is not correct.');
       } else {
-        console.log(hasGroup(Meteor.userId()));
-        if (hasGroup(Meteor.userId())){
-            Router.go('/dashboard');
-          } else {
-            Router.go('/creategroup');
-          }
+        loginSuccess();
       }
     });
   },

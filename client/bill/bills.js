@@ -1,8 +1,3 @@
-// Template.billsList.helpers({
-// 	bills: function(){
-// 		return Bills.find({},{sort: {addedAt: -1}});
-// 	}
-// });
 
 Template.billItem.helpers({
 	totalAmount: function(itemArr, divideBy){
