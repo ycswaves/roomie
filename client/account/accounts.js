@@ -126,16 +126,16 @@ Template.loginForm.events({
     });
   },
 
-  'click #twitterLogin' : function(e, t){
-    e.preventDefault();
-    Meteor.loginWithTwitter(function(err){
-      if (err && err.error === 403) {
-          Session.set('displayMessage', 'Login Error: username or password is not correct.');
-      } else {
-        loginSuccess();
-      }
-    });
-  },
+  // 'click #twitterLogin' : function(e, t){
+  //   e.preventDefault();
+  //   Meteor.loginWithTwitter(function(err){
+  //     if (err && err.error === 403) {
+  //         Session.set('displayMessage', 'Login Error: username or password is not correct.');
+  //     } else {
+  //       loginSuccess();
+  //     }
+  //   });
+  // },
 
   'click #googleLogin' : function(e, t){
     e.preventDefault();
