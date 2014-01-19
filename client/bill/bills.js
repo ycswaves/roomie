@@ -169,7 +169,9 @@ Template.newBill.events({
     }
     var payers = t.findAll('input[name=members]:checked');
 		var payerList = [];
+		var payerIDList = []; // for sending email later
 		for(var i=0; i<payers.length; i++) {
+			payerIDList[i] = payers[i].value;
 			var payer = {
 				payerId: payers[i].value,
 				hasPaid: false
@@ -186,7 +188,6 @@ Template.newBill.events({
     	notify: payerList,
     	addedAt: today
     }
-    console.log(bill);
 
     Bills.insert(bill, function(err, result){
 			if(err){
@@ -199,12 +200,22 @@ Template.newBill.events({
 				//console.log('bill insert success');
 				$('#newBillForm')[0].reset();
 				$('#billToggle').hide();
+				var mailList = getUserEmail(payerIDList);
+				var content = 'test msg'; 
 				Meteor.call('sendEmail',
 										 mailList, //to
 										'noreply@roomie.meteor.com',//from
 										'You have a new bill',//subject
-										 content //content'
-										);
+										 content, //content'
+									function (err, msg){
+                    if(err){
+                      //handle error
+                      console.log(err);
+                    }else{
+                    	//console.log(msg);
+                    }
+                  }
+				);
 			}
 		});
 	}
@@ -230,4 +241,19 @@ function updateBillItem(billId, oldVal, newValue, type){
     									editSuccessNotice();
     								}
     							});     
+}
+
+function getUserEmail (uidArr) {
+    var users = Meteor.users.find({_id: {$in: uidArr}}).fetch();
+    mailList = [];
+    for (var i = 0; i < users.length; i++) {
+      if(users[i].emails){
+        mailList.push(users[i].emails[0].address);
+      } else if (users[i].services.facebook){
+        mailList.push(users[i].services.facebook.email);
+      } else if (users[i].services.google){
+        users[i].services.google.email;
+      }
+    };
+    return mailList;   
 }
