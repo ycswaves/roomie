@@ -41,5 +41,11 @@ Template.topNav.events({
 		}); 
 
 		JoinApplications.remove({_id: msgid}); //delete the join apply
+	},
+
+	'click #joinDeny': function(e, t){
+		e.preventDefault();
+		var msgid = t.find('input[name=msgId]').value;
+		JoinApplications.remove({_id: msgid}); //delete the join apply
 	}
 })

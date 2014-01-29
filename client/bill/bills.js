@@ -201,7 +201,17 @@ Template.newBill.events({
 				$('#newBillForm')[0].reset();
 				$('#billToggle').hide();
 				var mailList = getUserEmail(payerIDList);
-				var content = 'test msg'; 
+				var content = 'Here is the summary of the bill: <br>'
+											+'<h2>'+billTitle+'</h2>'
+											+'<table style="font-size:1.75em">';
+				for (var i = 0; i < billDetails.length; i++){
+					content += '<tr>'
+											+'<td>'+billDetails[i].itemName+':&nbsp</td>'
+											+'<td>$'+billDetails[i].itemPrice+'</td>'
+										+'<tr>';
+				}
+				content += '</table><br>'+today+'<br>';
+				content += 'For more details, please click <a href="http://roomie.meteor.com">here</a>' 
 				Meteor.call('sendEmail',
 										 mailList, //to
 										'noreply@roomie.meteor.com',//from
@@ -212,7 +222,7 @@ Template.newBill.events({
                       //handle error
                       console.log(err);
                     }else{
-                    	//console.log(msg);
+                    	console.log('email sent');
                     }
                   }
 				);
