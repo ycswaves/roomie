@@ -1,6 +1,10 @@
 Template.topNav.helpers({
 	systemNotice: function(){
 		return JoinApplications.find({toId:Meteor.userId()});
+	},
+
+	joinedGroups: function(){
+		return Groups.find({members: Meteor.userId()});
 	}
 });
 

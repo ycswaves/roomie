@@ -52,7 +52,7 @@ function isValidName(val){
   return true;
 }
 
-function hasGroup(uid){
+function getDefaultGroup(uid){
   if (Meteor.user().defaultGroup == undefined) {
     Meteor.call('updateDefaultGroup', uid, 
                   function (err, msg){
@@ -65,13 +65,15 @@ function hasGroup(uid){
   } else if (Meteor.user().defaultGroup == ''){
     return false;
   } else {
-    return true; // could return default group id
+    return Meteor.user().defaultGroup;
   }
 }
 
 function loginSuccess(){
-  if (hasGroup(Meteor.userId())){
-    Router.go('/dashboard');
+  var defaultGroup = getDefaultGroup(Meteor.userId());
+  if (!!defaultGroup){
+    console.log(defaultGroup);
+    Router.go('dashboard',{_id:defaultGroup});
   } else {
     Router.go('/creategroup');
   }

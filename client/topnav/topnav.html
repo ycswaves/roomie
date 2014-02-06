@@ -15,6 +15,26 @@
 
             <li id="" class="dropdown">
               <a href="#" id="drop3" role="button" class="dropdown-toggle" data-toggle="dropdown">
+                <i class="fa fa-group"></i> my groups <b class="caret"></b>
+              </a>
+              <ul class="dropdown-menu" role="menu" aria-labelledby="drop3">
+                {{#each joinedGroups}}
+                <li role="presentation">
+                  <a role="menuitem" tabindex="-1" href="{{pathFor 'dashboard'}}"> - {{groupName}}</a>
+                </li>
+                {{/each}}
+                <li role="presentation" class="divider"></li>
+                <li role="presentation">
+                  <a role="menuitem" tabindex="-1" href="{{pathFor 'creategroup'}}">
+                    <i class="fa fa-plus"></i>&nbsp
+                    Join/Create Groups
+                  </a>
+                </li>
+              </ul>
+            </li>
+
+            <li id="" class="dropdown">
+              <a href="#" id="drop3" role="button" class="dropdown-toggle" data-toggle="dropdown">
                 <i class="fa fa-envelope"></i> inbox {{#if systemNotice.count}} <span class="badge">{{systemNotice.count}}</span>{{/if}}<b class="caret"></b>
               </a>
               <ul class="dropdown-menu" role="menu" aria-labelledby="drop3">

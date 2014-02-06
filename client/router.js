@@ -32,13 +32,14 @@ Router.map(function () {
   });
 
   this.route('dashboard',{
-  	path: '/dashboard',
+  	path: '/dashboard/:_id',
   	template: 'billPage',
     waitOn: function () {
       return Meteor.subscribe('bills');
     },
     data: function () {
-      var groupId = Meteor.user().defaultGroup;
+      var groupId = (this.params._id == '')? 
+            Meteor.user().defaultGroup : this.params._id;
       if (groupId == '') {
         this.redirect('creategroup');
       };
