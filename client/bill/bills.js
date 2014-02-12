@@ -262,7 +262,7 @@ function getUserEmail (uidArr) {
       } else if (users[i].services.facebook){
         mailList.push(users[i].services.facebook.email);
       } else if (users[i].services.google){
-        users[i].services.google.email;
+        mailList.push(users[i].services.google.email);
       }
     };
     return mailList;   
