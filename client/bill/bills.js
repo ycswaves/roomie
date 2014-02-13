@@ -236,7 +236,8 @@ function editSuccessNotice(){
 	$.pnotify({
     //title: 'Changes Saved!',
     text: 'Changes Saved!',
-    type: 'success'
+    type: 'success',
+    history: false
   });  
 }
 

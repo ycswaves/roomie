@@ -58,7 +58,7 @@ Template.createGroup.events({
 				    title: "Apply to join failed",
 				    text: "",
 				    type: "error",
-				    sticker: false
+				    history: false
 				});
 				console.log(errList);
 				//todo: handle err
@@ -68,7 +68,7 @@ Template.createGroup.events({
 				    title: "Application Sent",
 				    text: "You will join the group once your application is approved",
 				    type: "success",
-				    sticker: false
+				    history: false
 				});
 				console.log('success');
 			}

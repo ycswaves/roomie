@@ -1,1 +1,2 @@
-$.pnotify.defaults.delay = 5000;
+$.pnotify.defaults.delay = 3000;
+

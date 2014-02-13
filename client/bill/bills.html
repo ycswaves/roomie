@@ -5,12 +5,13 @@
       {{> leftSidebar}}
 	  	</div><!-- /span-3 -->
       <div class="col-sm-12 col-md-9 div-dashboard">
-      	<a href="#">
-      		<strong>
-      			<i class="fa fa-dashboard"></i> My Dashboard
-      		</strong>
-      	</a>  
-        <button id="addBillBtn" class="btn btn-info pull-right"><i class="fa fa-plus"></i> New bill</button>
+      	
+    		<h4 class="black-font">
+    			<i class="fa fa-dashboard"></i> My Dashboard
+    			<button id="addBillBtn" class="btn btn-info pull-right"><i class="fa fa-plus"></i> New bill</button>
+    		</h4>
+      	  
+        
       	<hr>
       	<div style="padding: 0 10px">
           {{> billsList}}
@@ -50,7 +51,7 @@
     </li> -->
   </ul>
   <hr class="style-dash">
-  <div class="">
+  <div class="black-font">
     <i class="fa fa-group"></i>&nbsp
     {{groupInfo.groupName}}
     <ul>
@@ -146,7 +147,7 @@
 </template>
 
 <template name="newBill">
-	<form class="form-horizontal" id="newBillForm" role="form">
+	<form class="form-horizontal black-font" id="newBillForm" role="form">
 	  <div id="inputOnlyDiv">
 		  <div class="form-group">
 		    <label class="col-sm-2 control-label">Bill Title</label>

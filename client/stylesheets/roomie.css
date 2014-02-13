@@ -82,6 +82,12 @@ body {
 .div-white{
 	background-color: #ffffff;
 }
+.black-font{
+  color: #000000;
+}
+a.editable{
+  color: #00aaff;
+}
 
 /* Gradient transparent - color - transparent */
 		
